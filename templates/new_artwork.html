@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Arts Concierge</title>
+</head>
+<body>
+<h2>New Artwork</h2>
+{% from "_formhelpers.html" import render_field %}
+<form method="post">
+    <dl>
+        {{ render_field(form.artist) }}
+        {{ render_field(form.title) }}
+        {{ render_field(form.medium) }}
+        {{ render_field(form.dimensions) }}
+        {{ render_field(form.image) }}
+        {{ render_field(form.location) }}
+        {{ render_field(form.city) }}
+        {{ render_field(form.country) }}
+        {{ render_field(form.on_view) }}
+    </dl>
+    <p><input type="submit" value="Submit"></p>
+</form>
+</body>
+</html>

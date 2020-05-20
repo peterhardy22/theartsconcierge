@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Arts Concierge</title>
+</head>
+
+<body>
+    <h2>The Arts Concierge Artwork Database</h2>
+
+    <a href="{{ url_for('.new_artwork') }}"> New Artwork </a>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flashes">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    {% from "_formhelpers.html" import render_field %}
+    <form method="POST">
+      <dl>
+        {{ render_field(form.select) }}
+        <p>
+        {{ render_field(form.search) }}
+      </p></dl>
+      <p><input type="submit" value="Search">
+    </p></form>
+</body>
+
+</html>
