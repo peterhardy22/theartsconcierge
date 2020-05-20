@@ -4,7 +4,7 @@
 
 <h1 align="center">What would you like to see today?</h1>
 
-<p align="center">The Arts Concierge will serve as a platform for artists and lovers of art to display and locate art!  We are here to help you find out with constant live tracking and management of art around the world. As an artist you can add your own artwork and help us all grow into the largest single collection of art!</p>
+<p align="center">The Arts Concierge will serve as a platform for artists and lovers of art to display and locate art!  We are here to help you find out with constant live tracking and management of art around the world. As an artist you can add your own artwork and help us grow into the largest single collection of art information!</p>
 
 ## Getting Started
 
