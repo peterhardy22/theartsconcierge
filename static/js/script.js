@@ -1,8 +1,8 @@
 // SEARCH BAR VARIABLES
-// creates variable for typing letters in the search bar on bayareatracker.html
+// creates variable for typing letters in the search bar on index.html
 const searchInput = document.getElementById('search');
 // MUSEUM/GALLERY VARIABLES
-// grabs all of the museum/gallery names from bayareatracker.html
+// grabs all of the museum/gallery names from index.html
 const institutionNamesRaw = document.getElementsByClassName("institutionName");
 // creates empty array for storing museum/gallery name strings
 const institutionNames = []
