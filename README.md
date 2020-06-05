@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/peterhardy22/theartsconcierge/blob/master/static/img/brand-img.png?raw=true" width="500" align="middle">
+  <img src="https://github.com/peterhardy22/theartsconcierge/blob/master/app/static/img/brand-img.png?raw=true" width="500" align="middle">
 </p>
 
 <h1 align="center">What would you like to see today?</h1>
