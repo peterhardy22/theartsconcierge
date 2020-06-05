@@ -1,10 +1,10 @@
 from bs4 import BeautifulSoup
+import re
 import requests
 import pandas as pd
 
 
 def scrape_all():
-    data = {}
     # MUSEUM SCRAPING
     # Function that scrapes Berkeley Art Museum Exhibit details
     def bampfa_scrape():
@@ -44,6 +44,45 @@ def scrape_all():
         bampfa_df.insert(0, 'institution', 'bampfa')
 
         return bampfa_df
+
+    # Function that scrapes CJM Exhibit details
+    def cjm_scrape():
+        # Request URL of Contemporary Jewish Museum Exhibits web page
+        cjm_page = requests.get("https://www.thecjm.org/current_exhibitions")
+        # Creates soup for reading HTML content easier
+        cjm_soup = BeautifulSoup(cjm_page.content, 'html.parser')
+        # Initialize empty lists to store data
+        titles = []
+        dates = []
+        images = []
+        links = []
+        # Create variable as block of HTML which has info we need
+        exhibition_div = cjm_soup.find_all('li', class_='exhibitions__section')
+        # For loop to iterate through and extract data
+        for container in exhibition_div:
+            # Titles
+            title = container.find('h3', class_='exhibition__title').text
+            titles.append(title)
+            # Dates
+            date = container.find('p', class_='exhibition__date-label').text
+            dates.append(date)
+            # Images
+            raw_image_url = container.find('a', class_='exhibition__image-container').get('style')
+            image_url = re.search("(?P<url>https?://[^\s]+(?<=)\))", raw_image_url).group("url")
+            image = image_url.replace(")", "")
+            images.append(image)
+            # Links
+            start_exhibit_url = "https://www.thecjm.org"
+            end_exhibit_url = container.find('a', class_='exhibition__image-container').get('href')
+            exhibit_url = start_exhibit_url + end_exhibit_url
+            links.append(exhibit_url)
+
+        cjm_exhibits = zip(titles, dates, images, links)
+
+        cjm_df = pd.DataFrame(cjm_exhibits, columns=['title', 'dates', 'image', 'link'])
+        cjm_df.insert(0, 'institution', 'cjm')
+
+        return cjm_df
 
     # Function that srapes de Young Exhibit details
     def deyoung_scrape():
@@ -164,6 +203,48 @@ def scrape_all():
 
         return omca_df
 
+    # Function that scrapes SFMCD Exhibit details
+    def sfmcd_scrape():
+        # Request URL of Museum of Craft and Design Exhibits web page
+        sfmcd_page = requests.get("https://sfmcd.org/exhibitions/")
+        # Creates soup for reading HTML content easier
+        sfmcd_soup = BeautifulSoup(sfmcd_page.content, 'html.parser')
+        # Initialize empty lists to store data
+        titles = []
+        dates = []
+        images = []
+        links = []
+        # Create variable as block of HTML which has info we need
+        exhibition_div = sfmcd_soup.find_all('li', class_='post-item')[:3]
+        # For loop to iterate through and extract data
+        for container in exhibition_div:
+            # Titles
+            title_raw = container.find('h2').text
+            title = " ".join(title_raw.split())
+            titles.append(title)
+            # Dates
+            date_raw = container.find('div', class_='post-body entry-content').text
+            date = date_raw.replace('\n', '')
+            if '*' in date:
+                final_date_raw = date[0:date.find('*')]
+                final_date = final_date_raw.rstrip()
+            else:
+                final_date = date
+            dates.append(final_date)
+            # Images
+            image = container.find('img').get('src')
+            images.append(image)
+            # Links
+            exhibit_url = container.find('a', class_='feature-image').get('href')
+            links.append(exhibit_url)
+
+        sfmcd_exhibits = zip(titles, dates, images, links)
+
+        sfmcd_df = pd.DataFrame(sfmcd_exhibits, columns=['title', 'dates', 'image', 'link'])
+        sfmcd_df.insert(0, 'institution', 'sfmcd')
+
+        return sfmcd_df
+
     # GALLERY SCRAPING
     # Function that scrapes Legion of Honor Exhibit details
     def fraenkel_scrape():
@@ -200,8 +281,8 @@ def scrape_all():
         return fraenkel_df
 
     def csv_exporter():
-        bayareatracker_df = pd.concat([bampfa_scrape(), deyoung_scrape(), legionofhonor_scrape(), omca_scrape(),
-                                       fraenkel_scrape()], axis=0)
+        bayareatracker_df = pd.concat([bampfa_scrape(), cjm_scrape(), deyoung_scrape(), legionofhonor_scrape(),
+                                       omca_scrape(), sfmcd_scrape(), fraenkel_scrape()], axis=0)
         bayareatracker_df.to_csv(r'static/data/csv/bayareatracker.csv', index=False)
 
     return csv_exporter()

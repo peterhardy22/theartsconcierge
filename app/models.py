@@ -4,7 +4,7 @@ import yaml
 
 
 def csv_importer():
-    with open('static/data/csv/bayareatracker.csv') as csv_file:
+    with open('app/static/data/csv/bayareatracker.csv') as csv_file:
         csv_data = csv.reader(csv_file, delimiter=',')
         first_line = True
         exhibits = []

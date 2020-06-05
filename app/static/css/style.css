@@ -24,9 +24,10 @@ body, main {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);    padding: 3%;
 }
 
-#bampfaCarouselExampleIndicators, #deyoungCarouselExampleIndicators,
+#bampfaCarouselExampleIndicators, #cjmCarouselExampleIndicators,
+#deyoungCarouselExampleIndicators,
 #legionofhonorCarouselExampleIndicators, #omcaCarouselExampleIndicators,
-#fraenkelCarouselExampleIndicators {
+#sfmcdCarouselExampleIndicators, #fraenkelCarouselExampleIndicators {
     padding: 100px 100px;
 }
 
@@ -76,4 +77,62 @@ li.active{
 
 .carousel-control-next-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+}
+
+
+@media only screen and (min-width: 991px) and (max-width: 1199px) {
+    h3 a {
+        font-size: 1.4rem;
+    }
+
+    p {
+        font-size: 1.1em;
+    }
+
+    .container {
+        max-width: 880px;
+    }
+
+    .carousel {
+        height: 450px !important;
+    }
+
+    .carousel-caption {
+        padding-bottom: 0% !important;
+    }
+
+    img {
+        height: 15em !important;
+        padding-left: 1% !important;
+        padding-top: 5% !important;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 990px) {
+    h3 a {
+        font-size: 1rem;
+    }
+
+    p {
+        font-size: 0.7em;
+    }
+
+    .container {
+        max-width: 880px;
+    }
+
+    .carousel-caption {
+        padding-bottom: 0 !important;
+    }
+
+    .carousel {
+        height: 370px !important;
+    }
+
+    img {
+        height: 10em !important;
+        bottom: 0 !important;
+        padding-left: 1% !important;
+        padding-top: 5% !important;
+    }
 }

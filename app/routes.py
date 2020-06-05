@@ -1,7 +1,7 @@
 # from geopy.geocoders import Nominatim
 from app import app
 from flask import render_template, jsonify
-from models import csv_importer
+from app.models import csv_importer
 
 
 # Route for main page of bay area tracker exhibit carousels
@@ -16,8 +16,3 @@ def index():
 def get_exhibits():
     exhibits = csv_importer()
     return jsonify({'exhibits': exhibits})
-
-
-if __name__ == '__main__':
-    app.run()
-
